@@ -1,0 +1,10 @@
+<service>
+<description>
+This is my first service, which says hello
+</description>
+<parameter name="ServiceClass">Hello</parameter>
+<operation name="sayHello">
+<messageReceiver
+class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
+</operation>
+</service>

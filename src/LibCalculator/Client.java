@@ -32,7 +32,7 @@ public class Client {
      */
     public static void run() throws RemoteException {
         String opdracht = vraagOpdracht();
-        if (opdracht != "exit") {
+        if (!opdracht.contains("exit")) {
             Double newOut = verwerkOpdracht(opdracht);
             JOptionPane.showMessageDialog(null,newOut);
             run();
@@ -44,7 +44,11 @@ public class Client {
      * print de vraag voor invoer van de user en vangt de invoer op.
      */
     public static String vraagOpdracht() {
-        String input = JOptionPane.showInputDialog("Wat voor een bewerking zou u willen uitvoeren?");;
+        String input = JOptionPane.showInputDialog("Wat voor een bewerking zou u willen uitvoeren?");
+        if(input==null){
+            printHelp();
+            vraagOpdracht();
+        }
         return input;
     }
 
@@ -52,9 +56,10 @@ public class Client {
      * dit zorgt voor dat de help geprint word wanneer dit aangeroepen word.
      */
     public static void printHelp() {
-        System.out.println("De verwachte invoer is: nummer bewerking nummer");
-        System.out.println("Een voorbeeld is 5 * 5");
-        System.out.println("Het programma eindigen met exit.");
+        JOptionPane.showMessageDialog(null,
+                        "De verwachte invoer is: nummer bewerking nummer "+
+                        "\n"+"Een voorbeeld is 5 * 5"+
+                        "\n"+"Het programma eindigen met exit.");
     }
 
     /**
@@ -111,7 +116,7 @@ public class Client {
                 output = resp.get_return();
             }
         } else {
-            System.out.println("Wrong output");
+            JOptionPane.showMessageDialog(null,"Wrong output");
             printHelp();
         }
 
